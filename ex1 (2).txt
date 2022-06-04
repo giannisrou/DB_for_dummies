@@ -1,0 +1,88 @@
+.include "m16def.inc"
+.def reg=r16                                            ; ldi works on the upper 16 registers (r16 =r31)
+
+
+reset:
+        ldi r24, low(RAMEND)                    ; initialize stack pointer
+        out SPL, r24
+        ldi r24, high(RAMEND)
+        out SPH, r24
+        ser r24                                 ; initialize PORTB for output
+        out DDRB, r24
+
+        clr r26                                 ; clear time counter
+        out DDRA, r26                                   ; initialize PORTA for input
+
+
+
+
+a1:
+        ldi reg, 1                                              ; reg = 00000001
+        clc
+        rjmp moving_left
+
+a3:
+        ldi reg, 2
+        clc
+
+moving_left:
+
+        sbic PINA, 0                                    ; if (bit0 in PINA == 0), skip the next line
+        rjmp moving_left
+
+        out PORTB, reg
+
+        rcall loads
+
+        rol reg
+
+        brcs a2                                         ; if (carry == 1), go to a2
+
+        rjmp moving_left
+
+a2:
+        ldi reg, 64                                                     ; reg = 01000000
+        clc
+
+moving_right:
+
+        sbic PINA, 0                                    ; if (bit0 in PINA == 0), skip the next line
+        rjmp moving_right
+
+        out PORTB, reg
+        rcall loads
+        ror reg
+
+        brcs a3                                         ; if (carry == 1), go to a3
+        rjmp moving_right
+
+
+loads:
+     ldi r24 , low(500)          ; load r25:r24 with 500
+        ldi r25 , high(500)         ; delay 0.5 second
+        rcall wait_msec
+        ret
+
+wait_msec:
+        push r24                                        ; 2 ?????? (0.250 ?sec)
+        push r25                                        ; 2 ??????
+        ldi r24 , low(498)              ; ??????? ??? ?????.  r25:r24 ?? 998 (1
+?????? - 0.125 ?sec)
+        ldi r25 , high(498)             ; 1 ?????? (0.125 ?sec)
+        rcall wait_usec                 ; 3 ?????? (0.375 ?sec), ???????? ????????
+??????????? 998.375 ?sec
+                                                                ; ???? ??????????? ??? ??????? ????????????????!
+        pop r25                         ; 2 ?????? (0.250 ?sec)
+        pop r24                         ; 2 ??????
+        sbiw r24 , 1                    ; 2 ??????
+        brne wait_msec                  ; 1 ? 2 ?????? (0.125 ? 0.250 ?sec)
+        ret                                                     ; 4 ?????? (0.500 ?sec)
+
+wait_usec:
+        sbiw r24 ,1                             ; 2 ?????? (0.250 ?sec)
+        nop                                     ; 1 ?????? (0.125 ?sec)
+        nop                                     ; 1 ?????? (0.125 ?sec)
+        nop                                     ; 1 ?????? (0.125 ?sec)
+        nop                                     ; 1 ?????? (0.125 ?sec)
+        brne wait_usec                          ; 1 ? 2 ?????? (0.125 ? 0.250 ?sec)
+     ret                        ; 4 ?????? (0.500 ?sec)
