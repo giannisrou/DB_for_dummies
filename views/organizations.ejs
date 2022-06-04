@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title> <%= pageTitle %> </title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+</head>
+
+<body>
+    
+    <div id="editModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit org</h4>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form">
+                    <div style="text-align: center;">
+                        <input type="text" name="org_name" id="org_name" readonly></br>
+                        <input type="text" name="acronym" id="acronym" ></br>
+                        <input type="text" name="street_name" id="street_name"></br>
+                        <input type="text" name="street_number" id="street_number"></br>
+                        <input type="text" name="city" id="city"></br>
+                        <input type="text" name="postal_code" id="postal_code"></br>
+                        <input type="text" name="org_id" id="org_id" readonly>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" form="modal-form" class="btn btn-success">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      
+        </div>
+    </div>
+
+    <%- include("includes/navbar.ejs")%>
+
+    <div class="container">
+        <div class="row" id="row">
+            <div class="col-md-12">
+                <div class="card" id="card-container">
+                    <div class="card-body" id="card">
+                    <% if (orgs.length == 0) { %> 
+                        <h1 style="margin-top: 5rem;">No organizations found!</h1>
+                    <% } else { %>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Organization Name</th>
+                                        <th>ACRONYM</th>
+                                        <th>Street Name</th>
+                                        <th>Street Number</th>
+                                        <th>City</th>
+                                        <th>Postal Code</th>
+                                        <th>ID</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% orgs.forEach((org, _) => { %>
+                                        <tr>
+                                            <td><%= org.Org_name %></td>
+                                            <td><%= org.ACRONYM %></td>
+                                            <td><%= org.street_name %></td>
+                                            <td><%= org.street_number %></td>
+                                            <td><%= org.city %></td>
+                                            <td><%= org.postal_code %></td>
+                                            <td><%= org.Org_ID %></td>
+
+                                            <td>
+                                                <a type="button" onclick="setModalFields(this)"
+                                                    data-toggle="modal" data-org_id="<%= org.Org_ID %>" 
+                                                    data-org_name="<%= org.Org_name%>" 
+                                                    data-acronym="<%= org.ACRONYM %>" 
+                                                    data-street_name="<%= org.street_name %>" 
+                                                    data-street_number="<%= org.street_number %>" 
+                                                    data-city="<%= org.city %>"
+                                                    data-postal_code="<%= org.postal_code %>"  
+                                                    data-target="#editModal">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </td>
+                                            <form method="POST" action="/organization/delete/<%= org.Org_name %>">
+                                                <td> 
+                                                    <button style="all: unset; cursor: pointer;" type="submit"><i class="fa fa-trash"></i></button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setModalFields(row) {
+            console.log(row.dataset)
+            document.getElementById("org_id").value = row.dataset.org_id;
+            document.getElementById("org_name").value = row.dataset.org_name;
+            document.getElementById("acronym").value = row.dataset.acronym;
+            document.getElementById("street_name").value = row.dataset.street_name;
+            document.getElementById("street_number").value = row.dataset.street_number;
+            document.getElementById("city").value = row.dataset.city;
+            document.getElementById("postal_code").value = row.dataset.postal_code;
+
+            document.getElementById("modal-form").action = "/organization/update/" + row.dataset.org_id;
+            document.getElementById("modal-form").method = "POST";
+        }
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    </body>
+</html>
