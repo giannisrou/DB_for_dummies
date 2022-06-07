@@ -10,7 +10,7 @@ Conrtibuters:
 Ιωάννης Ρουμελιώτης
 
 
-Tools Used
+Tools Used:
 Sql Server
 Mysql Workbench 
 NodeJS
@@ -18,7 +18,7 @@ nodemon
 express 
 ejs (template engine)
 
-Requirements
+Requirements:
 Sql server
 JsNode
 Ejs
