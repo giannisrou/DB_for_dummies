@@ -43,18 +43,19 @@ Insert mock data from csv files (if needed)
 Attention! It is vital to insert data in this specific order:
 
 Organizations
-Executives
-Programs
+Executive
+Program
 Scientific_Fields
-Researchers
-Projects
-Deliverables
-Project_Fields
+Researcher
+Project
+Deliverable
+Project_Field
 WorksOn
 Telephones
 Is_University
 Is_Company
 Is_ResearchCenter
+Telephone_Numbers
 
 
  Download and Run Web App:
