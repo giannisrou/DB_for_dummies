@@ -5,3 +5,93 @@
 ####Παπανικόλας Εμμανουήλ
 ####Ρουμελιώτης Ιωάννης
 
+ΕΛ.ΙΔ.Ε.Κ 
+Database For Dummies 
+
+Ομάδα 136
+
+Conrtibuters:
+Αγγελική Πνευματικού
+Εμμανουήλ Παπανικόλας
+Ιωάννης Ρουμελιώτης
+
+
+Tools Used
+Sql Server
+Mysql Workbench 
+NodeJS
+nodemon
+express 
+ejs (template engine)
+
+Requirements
+Sql server
+JsNode
+Ejs
+
+
+
+Installation:
+
+1.	At first make sure that you have installed SQL server version 8.0.28
+2.	Then connect to the server through a DBMS (such as MySQL Workbench) 
+
+Run the following SQL queries inside the DBMS 
+
+3.	Create_Table.sql to create the database and the tables and insert the data #εδώ αν γίνεται να βάλεις τα λινκ στα αντίστοιχα αρχεία
+4.	Idexes_.sql to create the indexes
+5.	Views_.sql to create the views 
+6.	Triggers._sql 
+
+Insert mock data from csv files (if needed) 
+7.	Insert mock data from the Mock_data. folder by using the Import wizard in myqsl workbench 
+
+Attention! It is vital to insert data in this specific order:
+
+Organizations
+Executives
+Programs
+Scientific_Fields
+Researchers
+Projects
+Deliverables
+Project_Fields
+WorksOn
+Telephones
+Is_University
+Is_Company
+Is_ResearchCenter
+
+
+ Download and Run Web App:
+8.	Make sure you have installed the NodeJs either from the command line (brew install npm) or manually by installing the packages given by the following site: https://nodejs.org/en/download/
+(Mac/Windows/Unix compatible)  
+9.	Make sure you have also installed a tool for coding such as Virtual Studio Code and that you have opened a directory called db-project, there:
+Open a new terminal and add the following commands in the given order:
+~npm init 
+~npm install express
+~ejsmysql2 custom-env
+~npm install nodemon 
+And to (or here in the command line you can also add the following command) ~cd db-project
+~npm start 
+
+
+In specific file called database.js you should add your own credentials in order to be able to connect the app with the database, specifically: 
+
+Host:”localhost”
+Port:3306 
+User: root
+Password: (write here if it exists)
+Database:”DatabaseForDummies”
+
+*These are for the MySQL Workbench (if you are using a different visual tool, then you will have to fill with different values depending on the port and the respective requirements of the application.
+
+
+
+Now open your browser and type http://localhost:3000 to preview the website
+
+
+SQL Queries
+In the folder SQL_Code you can find the file called “queries_.sql” that includes all the queries that were used on the site (the questions are included in the docs folder, ας εξαμηνιαία εργασία ΒΔ 2021-2022 v2)
+
+
