@@ -32,10 +32,10 @@ Installation:
 
 Run the following SQL queries inside the DBMS 
 
-3.	Create_Table.sql to create the database and the tables and insert the data #εδώ αν γίνεται να βάλεις τα λινκ στα αντίστοιχα αρχεία
-4.	Idexes_.sql to create the indexes
-5.	Views_.sql to create the views 
-6.	Triggers._sql 
+3.	Create_Table.sql to create the database and the tables and insert the data 
+4.	Idexes.sql to create the indexes
+5.	Views.sql to create the views 
+6.	Triggers.sql 
 
 Insert mock data from csv files (if needed) 
 7.	Insert mock data from the Mock_data. folder by using the Import wizard in myqsl workbench 
