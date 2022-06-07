@@ -92,6 +92,6 @@ having NumOfProjects>5 order by NumOfProjects desc;
 
 
 
-delete from researcher where researcher_id = "103";
+
 
 
