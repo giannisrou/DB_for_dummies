@@ -21,13 +21,13 @@ before update on project
 for each row 
 BEGIN
 if (new.supervisor_id not in (select r.researcher_id from researcher inner join project 
-as p on p.org_name=r.org_name)) 
+as p on p.org_name<>r.org_name)) 
 THEN 
 update  project set supervisor_id = new.supervisor_id;
 end IF; 
 END $$
 
-#3
+#3a
 DELIMITER $$
 create trigger insert_in_workson
 before insert on workson 
@@ -40,6 +40,20 @@ insert into workson set researcher_id = new.researcher_id;
 end IF; 
 END $$
 select * FROM project;
+
+#3b
+DELIMITER $$
+create trigger insert_in_workson_2
+before insert on workson 
+for each row 
+BEGIN
+if (new.researcher_id not in (select w.researcher_id from workson inner join project 
+as p on p.project_title=w.project_title inner join researcher as r on r.researcher_id = w.researcher_id)) 
+THEN 
+insert into workson set researcher_id = new.researcher_id;
+end IF; 
+END $$
+
 
 #4
 DELIMITER $$
