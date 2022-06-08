@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title> <%= pageTitle %> </title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+</head>
+
+<body style = "background-color: black;" >
+    
+    <%- include("includes/navbar.ejs")%>
+   
+
+    <div class="container" id="row-container">
+        <div class="row" id="row">
+            <div class="col-md-4">
+                <div class="card" id="card-container-layout">
+                    <div class="card-body" id="card">
+                        <h4 class="card-title">Researchers on Projects</h4>
+                        <p class="card-text" id="paragraph">Check out all the researchers and their projects</p>
+                        <a class="btn btn-primary" id="show-btn" href="/ppr">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title">Organizations & Programs on Projects</h4>
+                        <h6>query 3.2</h6>
+                        <p class="card-text" id="paragraph">Explore our Organizations and Programs that are connected to every project<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/pop">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title">Available Programs</h4>
+                        <p class="card-text" id="paragraph">Have a look at all our available programs<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/program">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title">Check The Info You Want </h4>
+                        <h6>query 3.1</h6>
+                        <p class="card-text" id="paragraph">select project with your criteria<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/query1">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title">Top 3 Pairs of Fields</h4>
+                        <h6>query 3.5</h6>
+                        <p class="card-text" id="paragraph">Check out our top 3 pairs of scientific fields<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/query5">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" id="card-container-layout">
+                    <div class="card-body" id="card">
+                        <h4 class="card-title">Available Projects</h4>
+                        <p class="card-text" id="paragraph">Have a look at all our available projects<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/project">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title">Available Executives</h4>
+                        <p class="card-text" id="paragraph">Have a look at all our available executives<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/executive">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title">Available Organizations</h4>
+                        <p class="card-text" id="paragraph">Have a look at all our available organizations<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/organization">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title">Hottest Scientific Fields</h4>
+                        <h6> query 3.3</h6>
+                        <p class="card-text" id="paragraph">Researchers working on the hottest field<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/query3">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title">Researchers With No Deliverables</h4>
+                        <h6>query 3.8</h6>
+                        <p class="card-text" id="paragraph">Check out the researchers who work on projects that do not have deliverables<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/query8">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title">Insert Info</h4>
+                        <p class="card-text" id="paragraph">For any addition, click here<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/get/forms">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" id="card-container-layout">
+                    <div class="card-body" id="card">
+                        <h4 class="card-title">Available Researchers</h4>
+                        <p class="card-text" id="paragraph">Have a look at all our available researchers<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/researcher">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title"> Researchers On Projects</h4>
+                        <p class="card-text" id="paragraph">Have a look at all our researchers on different projects<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/workson">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title"> Organizations' Contact Info</h4>
+                        <p class="card-text" id="paragraph">Find Contact Information <br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/telephones">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title"> Deliverables</h4>
+                        <p class="card-text" id="paragraph">See the projects' deliverables <br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/deliverable">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title"> Scientific Fields</h4>
+                        <p class="card-text" id="paragraph">Explore all our scientific fields <br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/field">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title">Top 5 Executives</h4>
+                        <h6>query 3.7</h6>
+                        <p class="card-text" id="paragraph">Check out our top 5 executives<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/query7">View</a>
+                        <div> -------- </div>
+                        <h4 class="card-title">Top Youngest Researchers</h4>
+                        <h6>query 3.6</h6>
+                        <p class="card-text" id="paragraph">Check out our youngest researchers<br></p>
+                        <a class="btn btn-primary" id="show-btn" href="/query6">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="row-6">
+                <div class="col-md-6">
+                    <div class="card" id="card-container-layout">
+                        <div class="card-body" id="card">
+                            <h5 class="card-title">Organizations that had over 9 projects per year for two consecutive years</h5> 
+                            <h6>query 3.4</h6>
+                            <p class="card-text" id="paragraph">The organization you are looking for is <%= query4 %> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
+</body>
+
+</html>

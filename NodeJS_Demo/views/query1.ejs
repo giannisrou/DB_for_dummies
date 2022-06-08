@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title> <%= pageTitle %> </title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+</head>
+
+<body style = "background-color: black;">
+    
+    <%- include("includes/navbar.ejs")%>
+
+
+
+<div class="container">
+    <div class="row" id="row">
+        <div class="col-md-12">
+            <div class="card" id="card-container">
+                <div class="card-body" id="card">
+                    <div class="col-md-12">
+                        <form class="form-horizontal" name="project-form" action="/query1" method="GET">              
+                            <div class="form-group col-sm-6 mb-6">
+                                <label for="project_title">duration</label>
+                                <input type="number" class="form-control" name="duration" placeholder="Enter duration in years">
+                            </div>
+                            <div class="form-group col-sm-6 mb-6">
+                                <label for="start_date">start_date</label>
+                                <input type="date" class="form-control" name="start_date" placeholder="Enter start date">
+                            </div>
+                            <div class="form-group col-sm-6 mb-6">
+                                <select name = "executive_id">
+                                    <option selected disabled>Choose Executive</option>
+                                    <%  executives.forEach((exec, _) => { %>
+                                    <option value = "<%= exec.Full_Name %>"><%= exec.Full_Name %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-submit-custom">Run Query 1</button>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Project Name</th>
+                                    <th>Executive</th>
+                                    <th>Start Date</th>
+                                    <th>Duration</th>
+                                    <th>Funding</th>
+                                    <th>Researcher</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% query1s.forEach((q, _) => { %>
+                                    <tr>
+                                        <td><%= q.project_title %></td>
+                                        <td><%= q.executive_name %></td>
+                                        <td><%= (q.date).toLocaleDateString('en-GB') %></td>
+                                        <td><%= q.duration %></td>
+                                        <td><%= q.funds %></td>
+                                        <td><%= q.researcher_name %></td>                                        
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
+</body>
+
+</html>

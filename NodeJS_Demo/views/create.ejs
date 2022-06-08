@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title> <%= pageTitle %> </title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<body style = "background-color: black;">
+    
+    <%- include("includes/navbar.ejs")%>
+    <div class="container">
+        <div class="row" id="row">
+            <div class="col-md-4">
+                <form class="form-horizontal" name="project-form" action="/create/project" method="POST">
+                    <h4 style ="color:white">Project Form</h4>
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="project_title" style ="color:cornflowerblue">Project Title</label>
+                        <input type="text" class="form-control" name="project_title" placeholder="Enter title">
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="description" style ="color:cornflowerblue">Description</label>
+                        <input type="text" class="form-control" name="description" placeholder="Enter Description">
+                    </div>
+                    <div class="form-group col-sm-6 mb6">
+                        <label for="funds" style ="color:cornflowerblue">Funds</label>
+                        <input type="text" class="form-control" name="funds" placeholder="Enter Funds">
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="start_date" style ="color:cornflowerblue">Start Date</label>
+                        <input type="date" class="form-control" name="start_date" placeholder="Enter Start Date">
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="end_date" style ="color:cornflowerblue">End Date</label>
+                        <input type="date" class="form-control" name="end_date" placeholder="Enter End Date">
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="supervision_duration" style ="color:cornflowerblue">Supervision Duration</label>
+                        <input type="text" class="form-control" name="supervision_duration" placeholder="Enter Supervision Duration">
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="evaluation_date" style ="color:cornflowerblue">Evaluation Date</label>
+                        <input type="date" class="form-control" name="evaluation_date" placeholder="Enter Evaluation Date">
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="evaluation" style ="color:cornflowerblue">Evaluation</label>
+                        <input type="text" class="form-control" name="evaluation" placeholder="Enter Evaluation">
+                    </div>
+                    <!-- <div class="form-group col-sm-3 mb-3">
+                        <label for="exec_id">Executive ID</label>
+                        <input type="text" class="form-control" name="exec_id" placeholder="Enter Executive ID">
+                    </div>
+                    <div class="form-group col-sm-3 mb-3">
+                        <label for="supervisor_id">Supervisor ID</label>
+                        <input type="text" class="form-control" name="supervisor_id" placeholder="Enter Supervisor ID">
+                    </div>
+                    <div class="form-group col-sm-3 mb-3">
+                        <label for="evaluator_id">Evaluator ID</label>
+                        <input type="text" class="form-control" name="evaluator_id" placeholder="Enter Evaluator ID">
+                    </div>
+                    <div class="form-group col-sm-3 mb-3">
+                        <label for="org_name">Organization</label>
+                        <input type="text" class="form-control" name="org_name" placeholder="Enter Organization">
+                    </div>
+                    <div class="form-group col-sm-3 mb-3">
+                        <label for="prog_name">Program</label>
+                        <input type="text" class="form-control" name="prog_name" placeholder="Enter Program">
+                    </div> -->
+                    <div class="form-group col-sm-6 mb-6">
+                        <select name = "exec_id">
+                            <option selected disabled>Choose Executive</option>
+                            <%  executives.forEach((exec, _) => { %>
+                            <option value = "<%= exec.Exec_ID %>"><%= exec.Exec_ID %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <select name = "evaluator_id">
+                            <option selected disabled>Choose Evaluator</option>
+                            <%  evaluators.forEach((eval, _) => { %>
+                            <option value = "<%= eval.Researcher_ID %>"><%= eval.Researcher_ID %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <select name = "org_name">
+                            <option selected disabled>Choose Organization Name</option>
+                            <%  orgs.forEach((org, _) => { %>
+                            <option value = "<%= org.Org_name %>"><%= org.Org_name %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <select name = "supervisor_id">
+                            <option selected disabled>Choose Supervisor</option>
+                            <%  evaluators.forEach((eval, _) => { %>
+                            <option value = "<%= eval.Researcher_ID %>"><%= eval.Researcher_ID %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm6 mb-6">
+                        <select name = "prog_name">
+                            <option selected disabled>Choose Program</option>
+                            <%  programs.forEach((prog, _) => { %>
+                            <option value = "<%= prog.Prog_Name %>"><%= prog.Prog_Name %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                </form>
+               
+            </div>
+
+            <div class="col-md-5">
+                <form class="form-horizontal" name="researcher-form" action="/create/researcher" method="POST">
+                    <h4 style ="color:white">Researcher Form</h4>
+                    <div class="form-group col-sm-3 mb-3">
+                        <label for="first_name" style ="color:cornflowerblue">First Name</label>
+                        <input type="text" class="form-control" name="first_name" placeholder="Enter Name">
+                    </div>
+                    <div class="form-group col-sm-3 mb-3">
+                        <label for="last_name" style ="color:cornflowerblue">Last Name</label>
+                        <input type="text" class="form-control" name="last_name" placeholder="Enter Name">
+                    </div>
+                    <div class="form-group col-sm-3 mb-3">
+                        <label for="dob" style ="color:cornflowerblue">Date of Birth</label>
+                        <input type="date" class="form-control" name="dob" placeholder="Enter Date">
+                    </div>
+                    <div class="form-group col-sm-3 mb-3">
+                        <label for="gender" style ="color:cornflowerblue">Gender</label>
+                        <input type="text" class="form-control" name="gender" placeholder="Enter Gender">
+                    </div>                    
+                    <div class="form-group col-sm-3 mb-3">
+                        <select name = "org_name">
+                            <option selected disabled>Choose Organization Name</option>
+                            <%  orgs.forEach((org, _) => { %>
+                            <option value = "<%= org.Org_name %>"><%= org.Org_name %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                </form>
+                <form class="form-horizontal" name="organization-form" action="/create/organization" method="POST">
+                    <h4 style ="color:white">Organization Form</h4>
+                    <div class="form-group col-sm-9 mb-9">
+                        <label for="org_name" style ="color:cornflowerblue">Organization Name</label>
+                        <input type="text" class="form-control" name="org_name" placeholder="Enter Organization Name">
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="acronym" style ="color:cornflowerblue">ACRONYM</label>
+                        <input type="text" class="form-control" name="acronym" placeholder="Enter ACRONYM">
+                    </div>
+                    <div class="form-group col-sm-9 mb-9">
+                        <label for="street_name" style ="color:cornflowerblue">Street Name</label>
+                        <input type="text" class="form-control" name="street_name" placeholder="Enter Street Name">
+                    </div>      
+                    <div class="form-group col-sm-4 mb-4">
+                        <label for="street_number" style ="color:cornflowerblue">Street Number</label>
+                        <input type="text" class="form-control" name="street_number" placeholder="Enter Street Number">
+                    </div>      
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="city" style ="color:cornflowerblue">City</label>
+                        <input type="text" class="form-control" name="city" placeholder="Enter City">
+                    </div>                
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="postal_code" style ="color:cornflowerblue">Postal Code</label>
+                        <input type="text" class="form-control" name="postal_code" placeholder="Enter Postal Code">
+                    </div>  
+                    <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                    
+                </form>
+                <form class="form-horizontal" name="iscompany-form" action="/create/iscompany" method="POST">
+                    <h4 style ="color:white">Company Form</h4>
+                    <div class="form-group col-sm-3 mb-3">
+                        <select name = "org_name">
+                            <option selected disabled>Choose Organization Name</option>
+                            <%  orgs.forEach((org, _) => { %>
+                            <option value = "<%= org.Org_name %>"><%= org.Org_name %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="equity"style ="color:cornflowerblue">Equity</label>
+                        <input type="number" class="form-control" name="equity" placeholder="Enter Equity">
+                    </div>
+               
+                    <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                    
+                </form>
+                <form class="form-horizontal" name="iscompany-form" action="/create/isuniversity" method="POST">
+                    <h4 style ="color:white">University Form</h4>
+                    <div class="form-group col-sm-3 mb-3">
+                        <select name = "org_name">
+                            <option selected disabled>Choose Organization Name</option>
+                            <%  orgs.forEach((org, _) => { %>
+                            <option value = "<%= org.Org_name %>"><%= org.Org_name %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="funds" style ="color:cornflowerblue">Budget From Ministry</label>
+                        <input type="number" class="form-control" name="funds" placeholder="Enter Budget">
+                    </div>
+               
+                    <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                    
+                </form>
+                <form class="form-horizontal" name="iscompany-form" action="/create/isuniversity" method="POST">
+                    <h4 style ="color:white">Research Center Form</h4>
+                    <div class="form-group col-sm-3 mb-3">
+                        <select name = "org_name">
+                            <option selected disabled>Choose Organization Name</option>
+                            <%  orgs.forEach((org, _) => { %>
+                            <option value = "<%= org.Org_name %>"><%= org.Org_name %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="budget" style ="color:cornflowerblue">Budget From Ministry</label>
+                        <input type="number" class="form-control" name="budget" placeholder="Enter Budget">
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="funds" style ="color:cornflowerblue">Private Funds</label>
+                        <input type="number" class="form-control" name="funds" placeholder="Enter Private Funds">
+                    </div>
+               
+                    <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                    
+                </form>
+            </div>
+            <div class="col-md-3">
+                <form class="form-horizontal" name="program-form" action="/create/program" method="POST">
+                    <h4 style ="color:white">Program Form</h4>
+                    <div class="form-group col-sm-9 mb-9">
+                        <label for="prog_name" style ="color:cornflowerblue">Program Name</label>
+                        <input type="text" class="form-control" name="prog_name" placeholder="Enter Program">
+                    </div>
+                    <div class="form-group col-sm-6 mb-6">
+                        <label for="funds" style ="color:cornflowerblue">Funds</label>
+                        <input type="number" class="form-control" name="funds" placeholder="Enter Funding">
+                    </div>
+                    <div class="form-group col-sm-12 mb-12">
+                        <label for="address" style ="color:cornflowerblue">Address</label>
+                        <input type="text" class="form-control" name="address" placeholder="Enter Address">
+                    </div>                
+                    <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                    
+                </form>
+                <form class="form-horizontal" name="executive-form" action="/create/executive" method="POST">
+                <h4 style ="color:white">Exectuve Form</h4>
+                    <div class="form-group col-sm-12 mb-12">
+                        <label for="full_name" style ="color:cornflowerblue">Full Name</label>
+                        <input type="text" class="form-control" name="full_name" placeholder="Enter Full Name">
+                    </div>
+             
+                    <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                </form>
+                <form class="form-horizontal" name="deliverable-form" action="/create/deliverable" method="POST">
+                    <h4 style ="color:white">Deliverable Form</h4>
+                        <div class="form-group col-sm-12 mb-12">
+                            <label for="deliverable_title" style ="color:cornflowerblue">Deliverable Title</label>
+                            <input type="text" class="form-control" name="deliverable_title" placeholder="Enter Deliverable Title">
+                        </div>
+                        <div class="form-group col-sm-12 mb-12">
+                            <label for="deliverable_summary" style ="color:cornflowerblue">Deliverable Summary</label>
+                            <input type="text" class="form-control" name="deliverable_summary" placeholder="Enter Deliverable Summary">
+                        </div>
+                        <div class="form-group col-sm-10 mb-10">
+                            <select name = "project_title">
+                                <option selected disabled>Choose Project </option>
+                                <%  projects.forEach((proj, _) => { %>
+                                <option value = "<%= proj.Project_Title %>"><%= proj.Project_Title %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                 
+                        <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                    </form>
+                    <form class="form-horizontal" name="deliverable-form" action="/create/deliverable" method="POST">
+                        <h4 style ="color:white">Telephone Form</h4>
+                            <div class="form-group col-sm-12 mb-12">
+                                <label for="telephone_number" style ="color:cornflowerblue">Telephone Number</label>
+                                <input type="text" class="form-control" name="telephone_number" placeholder="Enter Telephone Number">
+                            </div>
+                            <div class="form-group col-sm-12 mb-12">
+                                <label for="type" style ="color:cornflowerblue">Type of Number </label>
+                                <input type="text" class="form-control" name="type" placeholder="Enter Type">
+                            </div>
+                            <div class="form-group col-sm-3 mb-3">
+                                <select name = "org_name">
+                                    <option selected disabled>Choose Organization Name</option>
+                                    <%  orgs.forEach((org, _) => { %>
+                                    <option value = "<%= org.Org_name %>"><%= org.Org_name %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                     
+                            <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                        </form>
+                        <form class="form-horizontal" name="deliverable-form" action="/create/workson" method="POST">
+                            <h4 style ="color:white">Researcher-Project Relation Form</h4>
+                            <div class="form-group col-sm-3 mb-3">
+                                <select name = "researcher_id">
+                                    <option selected disabled>Choose Researcher</option>
+                                    <%  evaluators.forEach((eval, _) => { %>
+                                    <option value = "<%= eval.Researcher_ID %>"><%= eval.First_Name %> <%= eval.Last_Name %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                                <div class="form-group col-sm-10 mb-10">
+                                    <select name = "project_title">
+                                        <option selected disabled>Choose Project </option>
+                                        <%  projects.forEach((proj, _) => { %>
+                                        <option value = "<%= proj.Project_Title %>"><%= proj.Project_Title %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                         
+                                <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                            </form>
+                            <form class="form-horizontal" name="projectfield-form" action="/create/projectfield" method="POST">
+                                <h4 style ="color:white">Connect a Project to a Field Form</h4>
+                                <div class="form-group col-sm-10 mb-10">
+                                    <select name = "project_title">
+                                        <option selected disabled>Choose Project </option>
+                                        <%  projects.forEach((proj, _) => { %>
+                                        <option value = "<%= proj.Project_Title %>"><%= proj.Project_Title %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-10 mb-10">
+                                    <select name = "field">
+                                        <option selected disabled>Choose Field </option>
+                                        <%  field.forEach((field, _) => { %>
+                                        <option value = "<%= field.field %>"><%= field.Field %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                           
+                                <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
+                                
+                            </form>
+            </div>
+            
+
+        </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
