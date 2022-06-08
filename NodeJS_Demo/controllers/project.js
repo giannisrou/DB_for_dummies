@@ -21,7 +21,7 @@ exports.getProj = (req, res, next) => {
 
 exports.postUpdateProj = (req, res, next) => {
 
-    const project_title = req.body.project_title;
+    const project_title = req.body.id;
     const description = req.body.description
     const funds = req.body.funds;
     const start_date = req.body.start_date;
@@ -57,7 +57,7 @@ exports.postUpdateProj = (req, res, next) => {
 
 exports.postDeleteProj = (req, res, next) => {
     /* get id from params */
-    const project_name = req.params.project_title;
+    const project_name = req.params.id;
     
     /* create the connection, execute query and redirect to programs route */
     pool.getConnection((err, conn) => {
